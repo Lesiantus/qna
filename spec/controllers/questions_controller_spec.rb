@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) }
   let(:user) { create(:user) }
+  let(:question) { create(:question, user: user) }
+  let(:not_author) { create(:user) }
   describe 'GET #index' do
     let(:questions) { create_list(:question, 3) }
     before { get :index }
@@ -23,6 +24,10 @@ RSpec.describe QuestionsController, type: :controller do
 
     it 'renders show view' do
       expect(response).to render_template :show
+    end
+
+    it 'assigns new answer for question' do
+      expect(assigns(:answer)).to be_a_new(Answer)
     end
   end
 
@@ -103,11 +108,20 @@ RSpec.describe QuestionsController, type: :controller do
         question.reload
 
         expect(question.title).to eq 'MyString'
-        expect(question.body).to eq 'MyText'
+        expect(question.body).to eq '12t12'
       end
+    end
+    context 'user is not an author' do
+      before { login(not_author) }
 
-      it 're_renders edir view' do
-        expect(response).to render_template :edit
+      it 'can not update the question' do
+        patch :update, params: { id: question, question: { title: 'new title', body: 'new body' }, format: :js }
+        question.reload
+
+        expect(question.title).to_not eq 'new title'
+        expect(question.body).to_not eq 'new body'
+
+        expect(response).to_not redirect_to question
       end
     end
   end
