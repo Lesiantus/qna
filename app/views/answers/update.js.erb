@@ -1,0 +1,5 @@
+<% if !@answer.errors.present? %>
+    $('.answer').append('<%= j render @answers %>');
+<% else %>
+    $('.answer-edit-errors').prepend("<%= j render 'shared/errors', resource: @answer %>");
+<% end %>

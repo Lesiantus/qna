@@ -3,7 +3,7 @@ FactoryBot.define do
     association :user, factory: :user
 
     title { "MyString" }
-    body { "MyText" }
+    body { "12t12" }
 
     trait :invalid do
       title { nil }
