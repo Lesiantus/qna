@@ -1,5 +1,5 @@
 <% if !@question.errors.present? %>
     $('.question').append('<%= j render @question %>');
 <% else %>
-    $('.question-errors').html("<%= j render 'shared/errors', resource: @question %>");
+    $('.question-edit-errors').html("<%= j render 'shared/errors', resource: @question %>");
 <% end %>

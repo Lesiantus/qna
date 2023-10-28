@@ -6,8 +6,12 @@ div class = "answer-#{answer.id}"
   - else
     p= answer.body
 
+  - if answer.files.attached?
+    - answer.files.each do |f|
+      p= link_to f.filename.to_s, url_for(f)
+
   - if current_user&.author?(answer)
-    = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id }
+    = link_to 'Edit', '#', class: 'edit-answer-link', remote: true, data: { answer_id: answer.id }
     = link_to ' | Delete answer', answer_path(answer), method: :delete, remote: true
 
   - if current_user&.author?(answer.question) && !answer.best?
@@ -18,8 +22,16 @@ div class = "answer-#{answer.id}"
       data: { answer_id: answer.id }
 
   = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" }, local: false do |f|
+
     .answer-edit-errors
       = render 'shared/errors', resource: @answer
-    = f.label :body, 'Your answer'
-    = f.text_area :body
-    = f.submit 'Save'
+    p
+      = f.label :body, 'Your answer'
+    p
+      = f.text_area :body
+    p
+      = f.label :files
+      = f.file_field :files, multiple: true, direct_upload: true
+    = render 'shared/files', resource: answer
+    p
+      = f.submit 'Save'

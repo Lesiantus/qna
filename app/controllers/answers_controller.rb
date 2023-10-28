@@ -20,7 +20,10 @@ class AnswersController < ApplicationController
 
   def update
     if autorship!
-      if @answer.update(answer_params)
+      if answer_params[:files].present?
+        @answer.files.attach(answer_params[:files])
+      end
+      if @answer.update(answer_params.except(:files))
         redirect_to @answer.question, notice: 'Answer successfully updated!'
       end
     else
@@ -51,11 +54,11 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body, files: [])
   end
 
   def find_answer
-    @answer = Answer.find(params[:id])
+    @answer = Answer.with_attached_files.find(params[:id])
   end
 
   def current_question_answers

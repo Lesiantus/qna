@@ -1,7 +1,14 @@
-= form_with model: @question, class: 'hidden', html: { id: "edit-question-form" } do |f|
-  = render 'shared/errors', resource: @question
-  p= f.label :title, 'Question title'
-  = f.text_field :title
-  p= f.label :body, 'Question body'
-  = f.text_area :body
+= form_with model: @question, class: 'hidden', html: { id: "edit-question-form" }, local: false do |f|
+  .question-edit-errors
+    = render 'shared/errors', resource: @question
+  = render 'shared/files', resource: @question
+  p
+    = f.label :title, 'Question title'
+    = f.text_field :title
+  p
+    = f.label :body, 'Question body'
+    = f.text_area :body
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true, direct_upload: true
   = f.submit 'Save'

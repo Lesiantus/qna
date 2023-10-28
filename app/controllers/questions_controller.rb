@@ -27,8 +27,12 @@ class QuestionsController < ApplicationController
 
   def update
     if autorship!
-      @question.update(question_params)
-      redirect_to @question, notice: 'Your question successfully updated!'
+      if question_params[:files].present?
+        @question.files.attach(question_params[:files])
+      end
+      if @question.update(question_params.except(:files))
+        redirect_to @question, notice: 'Your question successfully updated!'
+      end
     else
       render :edit
     end
@@ -50,11 +54,11 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    @question = Question.find(params[:id])
+    @question = Question.with_attached_files.find(params[:id])
   end
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, files: [])
   end
 
   def find_answers

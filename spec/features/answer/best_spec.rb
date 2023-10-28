@@ -20,7 +20,7 @@ feature 'Best answer', %q{
     before { sign_in user }
     before { visit question_path(question) }
 
-    scenario 'best answer link not available for best answer' do
+    scenario 'best answer link not available for best answer', js: true do
       within(".answer-#{answers[0].id}") do
         click_on 'Choose the best'
 
