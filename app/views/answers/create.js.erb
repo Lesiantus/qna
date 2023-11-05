@@ -2,6 +2,10 @@
 <% if @answer.persisted? %>
     $('.answers').append('<%= j render @answer %>');
     $('.new-answer #answer_body').val('');
+    $('.new-answer input[id^="answer_links_attributes_"][id$="_name"]').val('');
+    $('.new-answer input[id^="answer_links_attributes_"][id$="_url"]').val('');
+    $('.nested-fields:not(:first)').remove();
+    $('.answer-errors').remove();
 <% else %>
     $('.answer-errors').html("<%= j render 'shared/errors', resource: @answer %>");
 <% end %>
