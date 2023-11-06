@@ -9,8 +9,8 @@ div class = "answer-#{answer.id}"
 
   .links
     = render 'shared/links_block', resource: answer
-
-  = render 'shared/files', resource: @answer
+  .files
+    = render 'shared/files', resource: answer
 
   - if current_user&.author?(answer)
     = link_to 'Edit', '#', class: 'edit-answer-link', remote: true, data: { answer_id: answer.id }
@@ -35,5 +35,9 @@ div class = "answer-#{answer.id}"
       = f.label :files
       = f.file_field :files, multiple: true, direct_upload: true
     = render 'shared/files', resource: answer
+    p
+      = f.fields_for :links do |l|
+      .links
+        = link_to_add_association 'Add link', f, :links, partial: 'shared/links_field'
     p
       = f.submit 'Save'

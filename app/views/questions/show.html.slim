@@ -2,6 +2,7 @@
   p = @question.title
   p = @question.body
   .question-errors
+  .flash
 
   - if @question.files.attached?
     - @question.files.each do |file|

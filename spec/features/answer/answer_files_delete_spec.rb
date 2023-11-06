@@ -18,8 +18,6 @@ feature 'Author of answer can delete attached file', %q{
     visit question_path(question)
     expect(page).to have_link 'rails_helper.rb'
 
-    click_on 'Edit'
-
     click_on 'Remove file'
 
     visit question_path(question)
