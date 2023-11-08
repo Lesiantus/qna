@@ -8,10 +8,14 @@ class QuestionsController < ApplicationController
   def show
     find_answers
     @answer = Answer.new
+    @answer.links.build
   end
 
   def new
     @question = current_user.questions.new
+    @question.links.build
+    @award = Award.new
+    @question.award = @award
   end
 
   def edit; end
@@ -54,11 +58,13 @@ class QuestionsController < ApplicationController
   end
 
   def load_question
-    @question = Question.with_attached_files.find(params[:id])
+    @question ||= params[:id] ? Question.with_attached_files.find(params[:id]) : Question.new
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body, files: [],
+                                     links_attributes: %i[name url],
+                                     award_attributes: %i[name image])
   end
 
   def find_answers

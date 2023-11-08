@@ -1,0 +1,9 @@
+p Links for #{resource.class.name.downcase}:
+ul
+  - resource.links.each do |link|
+    = link_to link.name, link.url
+    - if link.gist?
+      code data-gist-id=link.gist_body
+    - if current_user&.author?(resource)
+      p
+        = link_to 'Remove link', link_path(link), method: :delete, remote: true
