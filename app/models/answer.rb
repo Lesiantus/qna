@@ -1,4 +1,5 @@
 class Answer < ApplicationRecord
+  include Votable
   belongs_to :question
   belongs_to :user
 
@@ -18,5 +19,9 @@ class Answer < ApplicationRecord
       update!(best: true)
       question.award&.update!(user: user)
     end
+  end
+
+  def files_info
+    files.map { |file| { name: file.filename.to_s, id: file.id } }
   end
 end
