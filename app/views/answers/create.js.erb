@@ -5,6 +5,7 @@
     $('.new-answer input[id^="answer_links_attributes_"][id$="_url"]').val('');
     $('.nested-fields:not(:first)').remove();
     $('.answer-errors').remove();
+    window.GistEmbed.init();
 <% else %>
     $('.answer-errors').html("<%= j render 'shared/errors', resource: @answer %>");
 <% end %>

@@ -7,6 +7,13 @@ div class = "answer-#{answer.id}"
   - else
     p= answer.body
 
+  .voting
+    -if current_user != answer.user && signed_in?
+      = render 'votes/vote', resource: answer
+    -if current_user&.author?(answer)
+      .score
+        = answer.rating
+
   .links
     = render 'shared/links_block', resource: answer
   .files

@@ -4,6 +4,8 @@ class AnswersController < ApplicationController
   before_action :find_question, only: %i[index create new]
   before_action :current_question_answers, only: %i[destroy best]
 
+  include Voted
+
   def index
     @answers = current_question_answers
   end
@@ -15,7 +17,25 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.build(answer_params)
     @answer.user = current_user
-    @answer.save
+
+    respond_to do |format|
+      if @answer.save
+        files_info = @answer.files_info.map do |file_info|
+          file = ActiveStorage::Attachment.find(file_info[:id]).blob
+          file_info.merge({ url: rails_blob_path(file, only_path: true) })
+        end
+
+        format.json { render json: @answer.as_json(
+                      include: { links: { only: [:name, :url] } },
+                      methods: [:files_info]
+                      ).merge({ files_info: files_info })
+                    }
+      else
+        format.json do
+          render json: @answer.errors.full_messages, status: :unprocessable_entity
+        end
+      end
+    end
   end
 
   def update

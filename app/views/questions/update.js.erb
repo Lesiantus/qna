@@ -1,5 +1,6 @@
 <% if !@question.errors.present? %>
     $('.question').append('<%= j render @question %>');
+    window.GistEmbed.init();
 <% else %>
     $('.question-edit-errors').html("<%= j render 'shared/errors', resource: @question %>");
 <% end %>

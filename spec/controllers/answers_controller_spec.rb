@@ -10,14 +10,10 @@ RSpec.describe AnswersController, type: :controller do
     context 'with valid attributes' do
       before { login(user) }
       it 'saves a new answer in the database' do
-        expect { post :create, params: { answer: attributes_for(:answer), question_id: question }, format: :js }.to change(Answer, :count).by(1)
-      end
-      it 'redirects to question_answers_path' do
-        post :create, params: { answer: attributes_for(:answer), question_id: question }, format: :js
-        expect(response).to redirect_to question_answers_path(question)
+        expect { post :create, params: { answer: attributes_for(:answer), question_id: question }, format: :json }.to change(Answer, :count).by(1)
       end
       it 'assigns the answer to the question' do
-        post :create, params: { answer: attributes_for(:answer), question_id: question }, format: :js
+        post :create, params: { answer: attributes_for(:answer), question_id: question }, format: :json
         expect(assigns(:answer).question).to eq question
       end
     end
