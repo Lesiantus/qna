@@ -7,7 +7,7 @@ $(document).on('turbolinks:load', function(){
   })
   $('form.new-answer').on('ajax:success', function(e) {
     var answer = e.detail[0];
-    console.log(answer)
+    //console.log(answer)
 
     var answerHtml = '<p>' + answer.body + '</p>';
 
@@ -47,5 +47,5 @@ $(document).on('turbolinks:load', function(){
       $.each(errors, function(index, value) {
         $('.answer-errors').append('<p>' + value + '</p>');
       })
-    })
+    });
 });

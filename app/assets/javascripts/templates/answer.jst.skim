@@ -1,0 +1,10 @@
+div id="answer-#{@.id}" class="answer"
+  p "#{@.body}"
+  - if gon.user_id && (@.user_id != gon.user_id)
+    .voting
+      button class='vote plus' data-id="#{@.id}"
+        '+'
+      .score
+        = "#{@.rating}"
+      button class='vote minus' data-id="#{@.id}"
+        '-'

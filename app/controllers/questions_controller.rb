@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :load_question, only: %i[show edit update destroy]
 
+  after_action :publish_question, only: [:create]
+
   include Voted
   def index
     @questions = Question.all
@@ -61,6 +63,11 @@ class QuestionsController < ApplicationController
 
   def load_question
     @question ||= params[:id] ? Question.with_attached_files.find(params[:id]) : Question.new
+  end
+
+  def publish_question
+    return if @question.errors.any?
+    ActionCable.server.broadcast('questions', @question )
   end
 
   def question_params
