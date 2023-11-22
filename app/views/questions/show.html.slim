@@ -10,6 +10,14 @@ div class="question-#{@question.id}"
   p = @question.body
   .question-errors
   .flash
+   h3
+    | Comment section
+  .question-comments
+  - if @question.comments.any?
+    =render 'comments/comments', resource: @question
+  -if signed_in?
+    .comment-form
+      =render 'comments/form', resource: @question
 
   - if @question.files.attached?
     - @question.files.each do |file|

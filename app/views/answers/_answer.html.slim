@@ -19,6 +19,13 @@ div class = "answer-#{answer.id}"
   .files
     = render 'shared/files', resource: answer
 
+  .answer-comments
+    - if answer.comments.any?
+      =render 'comments/comments', resource: answer
+  .comment-form
+    -if signed_in?
+      =render 'comments/form', resource: answer
+
   - if current_user&.author?(answer)
     = link_to 'Edit', '#', class: 'edit-answer-link', remote: true, data: { answer_id: answer.id }
     = link_to ' | Delete answer', answer_path(answer), method: :delete, remote: true

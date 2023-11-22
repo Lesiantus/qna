@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   after_action :publish_question, only: [:create]
 
   include Voted
+  include Commented
   def index
     @questions = Question.all
   end
@@ -13,6 +14,7 @@ class QuestionsController < ApplicationController
     find_answers
     @answer = Answer.new
     @answer.links.build
+    gon.push question_id: @question.id
   end
 
   def new

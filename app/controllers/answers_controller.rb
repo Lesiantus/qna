@@ -6,6 +6,7 @@ class AnswersController < ApplicationController
   after_action :publish_answer, only: [:create]
 
   include Voted
+  include Commented
 
   def index
     @answers = current_question_answers
