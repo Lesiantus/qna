@@ -27,6 +27,10 @@ gem 'jquery-rails'
 
 # auth
 gem 'devise', '~> 4.0'
+gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-vkontakte'
 # yandex cloud setup
 gem 'aws-sdk-s3', require: false
 # Use Active Storage variant
@@ -43,8 +47,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails'
-  gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
+  gem 'localhost'
+  gem 'letter_opener'
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do
@@ -52,8 +58,8 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -61,6 +67,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'capybara-email'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
