@@ -5,11 +5,19 @@ div class="question-#{@question.id}"
     -if current_user&.author?(@question)
       .score
         = @question.rating
-.question
+.question[data-id="#{@question.id}"]
   p = @question.title
   p = @question.body
   .question-errors
   .flash
+   h3
+    | Comment section
+  .question-comments
+  - if @question.comments.any?
+    =render 'comments/comments', resource: @question
+  -if signed_in?
+    .comment-form
+      =render 'comments/form', resource: @question
 
   - if @question.files.attached?
     - @question.files.each do |file|

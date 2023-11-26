@@ -31,6 +31,8 @@ gem 'devise', '~> 4.0'
 gem 'aws-sdk-s3', require: false
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'gon'
+gem 'skim'
 gem 'slim-rails'
 
 # Reduces boot times through caching; required in config/boot.rb

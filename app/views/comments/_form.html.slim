@@ -1,0 +1,5 @@
+= form_with url: polymorphic_path([:add_comment, resource]), local: false do |f|
+  p
+  = f.text_area :body, placeholder: "Add comment to '#{resource.class.name.downcase}' here"
+  p
+  = f.submit 'Save comment'
