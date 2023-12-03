@@ -17,4 +17,16 @@ RSpec.describe User, type: :model do
       User.find_for_oauth(auth)
     end
   end
+  describe '#email_verified?' do
+    let(:user_invalid) { create(:user, email: 'temp@temp.temp') }
+    let(:user_valid) { create(:user, email: 'confirmed@mail.com') }
+
+    it 'temporary email' do
+      expect(user_invalid.email_confirmed?).to be_falsey
+    end
+
+    it 'confirmed email' do
+      expect(user_valid.email_confirmed?).to be_truthy
+    end
+  end
 end

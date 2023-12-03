@@ -8,7 +8,7 @@ feature 'User can look at his awards' do
 
   it 'renders awards page', js: true do
     sign_in(user)
-    page.evaluate_script('location.reload')
+    # page.evaluate_script('location.reload')
     visit question_path(question)
 
     click_on 'Choose the best'
