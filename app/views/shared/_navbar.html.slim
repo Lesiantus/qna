@@ -5,6 +5,8 @@
   = link_to ' | Main', questions_path
   p
   = link_to 'Awards', awards_path
+- elsif current_page?(new_user_registration_path)
+   = link_to ' Back', root_path
 - else
   = link_to 'Sign in', new_user_session_path
   = link_to 'Sign up', new_user_registration_path

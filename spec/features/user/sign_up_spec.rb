@@ -8,18 +8,28 @@ feature 'User can sign up', %q{
 
   given(:user) { create(:user) }
 
-  describe 'User creates account, clicking sign_up' do
+  background do
+    visit root_path
+    click_on 'Sign up'
+  end
 
-    background { visit new_user_registration_path }
+  scenario 'Unregistred user tries to register' do
 
-    scenario 'user signs up' do
-      fill_in 'Email', with: 'user@test.com'
-      fill_in 'Password', with: '12345678'
-      fill_in 'Password confirmation', with: '12345678'
-      click_button 'Sign up'
+    fill_in 'Email', with: 'user@mail.net'
+    fill_in 'Password', with: user.password
+    fill_in 'Password confirmation', with: user.password
+    click_on 'Sign up'
 
-      expect(page).to have_content 'Welcome! You have signed up successfully.'
-      expect(current_path).to eq root_path
-    end
+    sleep 1
+    open_email('user@mail.net')
+    current_email.click_link 'Confirm my account'
+
+
+    fill_in 'Email', with: 'user@mail.net'
+    fill_in 'Password', with: user.password
+    click_on 'Log in'
+
+    expect(page).to have_content 'user@mail.net'
+    expect(page).to have_content 'Sign out'
   end
 end

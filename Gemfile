@@ -51,6 +51,7 @@ group :development, :test do
   gem 'localhost'
   gem 'letter_opener'
   gem 'rspec-rails', '~> 6.0.0'
+  gem 'capybara-email'
 end
 
 group :development do
@@ -67,7 +68,6 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
-  gem 'capybara-email'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
