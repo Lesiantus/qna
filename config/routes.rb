@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
+
+  devise_scope :user do
+    match '/after_sign_up_unconfirmed/:id', to: 'confirmations#after_sign_up_unconfirmed', via: [:get, :patch], as: 'after_sign_up_unconfirmed'
+  end
+
   root to: 'questions#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
