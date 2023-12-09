@@ -5,6 +5,8 @@ class Link < ApplicationRecord
 
   GIST_REGEXP = /^https:\/\/gist\.github\.com\/\w+\/\w+/i
 
+
+
   def gist?
     url.match?(GIST_REGEXP)
   end

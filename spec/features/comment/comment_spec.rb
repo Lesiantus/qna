@@ -16,12 +16,12 @@ feature 'User can comment resource', %q{
     end
   end
 
-  describe 'Authenticated user', js: true do
+  describe 'Authenticated user' do
     background do
       sign_in(user)
       visit question_path(question)
     end
-    scenario 'can create a comment' do
+    scenario 'can create a comment', js: true do
       fill_in 'body', with: 'text text'
       click_on 'Save comment'
 
