@@ -27,6 +27,7 @@ gem 'jquery-rails'
 
 # auth
 gem 'devise', '~> 4.0'
+gem 'oj'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
@@ -35,6 +36,7 @@ gem 'omniauth-vkontakte'
 gem 'aws-sdk-s3', require: false
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+gem 'active_model_serializers', '~> 0.10'
 gem 'gon'
 gem 'skim'
 gem 'slim-rails'
@@ -43,6 +45,7 @@ gem 'slim-rails'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
 gem 'cocoon'
+gem 'doorkeeper'
 gem 'pundit'
 
 group :development, :test do

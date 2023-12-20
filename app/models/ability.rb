@@ -40,5 +40,7 @@ class Ability
     can :destroy, Link, linkable: { user_id: user.id }
 
     can :best, Answer, question: { user_id: user.id }
+
+    can :me, User
   end
 end
