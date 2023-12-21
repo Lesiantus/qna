@@ -8,6 +8,8 @@ class AnswersController < ApplicationController
   include Voted
   include Commented
 
+  authorize_resource
+
   def index
     @answers = current_question_answers
   end

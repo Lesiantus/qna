@@ -44,7 +44,7 @@ RSpec.describe AnswersController, type: :controller do
 
       it 'redirect to index view' do
         delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -83,10 +83,6 @@ RSpec.describe AnswersController, type: :controller do
       it 'changes answer attributes' do
         answer.reload
         expect(answer.body).to_not eq 'New body'
-      end
-
-      it 'renders :update back to question' do
-        expect(response).to redirect_to answer.question
       end
     end
   end

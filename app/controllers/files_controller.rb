@@ -3,6 +3,7 @@ class FilesController < ApplicationController
 
   def destroy
     @file = ActiveStorage::Attachment.find(params[:id])
+    authorize! :destroy, @file
     if current_user.author?(@file.record)
       @file.purge
     else
