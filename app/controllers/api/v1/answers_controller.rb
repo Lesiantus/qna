@@ -1,7 +1,6 @@
 module Api
   module V1
     class AnswersController < Api::V1::BaseController
-      protect_from_forgery with: :null_session
       authorize_resource
       def index
         render json: answers, each_serializer: AnswersSerializer
@@ -20,6 +19,23 @@ module Api
         else
           render json: answer.errors, status: :unprocessable_entity
         end
+      end
+
+      def update
+        answer
+
+        if answer.update(answer_params)
+          render json: answer, status: :ok
+        else
+          render json: answer.errors, status: :unprocessable_entity
+        end
+      end
+
+      def destroy
+        answer
+
+        answer.destroy
+        render json: nil, status: :no_content
       end
 
       private

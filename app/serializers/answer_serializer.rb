@@ -1,4 +1,5 @@
 class AnswerSerializer < ActiveModel::Serializer
+  include FileUrlHelper
   attributes :id,
              :body,
              :user_id,
@@ -8,8 +9,4 @@ class AnswerSerializer < ActiveModel::Serializer
              :files_url
   has_many :links
   has_many :comments
-
-  def files_url
-    object.files.map { |file| Rails.application.routes.url_helpers.rails_blob_url(file, host: 'localhost:3000') }
-  end
 end

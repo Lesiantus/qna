@@ -1,4 +1,5 @@
 class QuestionSerializer < ActiveModel::Serializer
+  include FileUrlHelper
   attributes :id,
              :title,
              :body,
@@ -13,9 +14,5 @@ class QuestionSerializer < ActiveModel::Serializer
 
   def short_title
     object.title.truncate(7)
-  end
-
-  def files_url
-    object.files.map { |file| Rails.application.routes.url_helpers.rails_blob_url(file, host: 'localhost:3000') }
   end
 end

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  check_authorization :unless => :do_not_check_authorization?
+  check_authorization unless: :do_not_check_authorization?
   before_action :gon_user, unless: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
