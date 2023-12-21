@@ -23,6 +23,7 @@ module Api
       end
 
       def update
+        authorize! :update, question
         question
         if question.update(question_params)
           render json: question, status: :ok
@@ -32,6 +33,7 @@ module Api
       end
 
       def destroy
+        authorize! :destroy, question
         question
         question.destroy
         render json: nil, status: :no_content

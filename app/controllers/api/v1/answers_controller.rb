@@ -22,6 +22,7 @@ module Api
       end
 
       def update
+        authorize! :update, answer
         answer
 
         if answer.update(answer_params)
@@ -32,6 +33,7 @@ module Api
       end
 
       def destroy
+        authorize! :destroy, answer
         answer
 
         answer.destroy
