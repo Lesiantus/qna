@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks' }
 
   devise_scope :user do
     match '/after_sign_up_unconfirmed/:id', to: 'confirmations#after_sign_up_unconfirmed', via: [:get, :patch], as: 'after_sign_up_unconfirmed'
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles, only: %i[index] do
+        get :me, on: :collection
+      end
+      resources :questions, only: %i[index show create update destroy] do
+        resources :answers, only: %i[index show create update destroy], shallow: true
+      end
+    end
   end
 
   root to: 'questions#index'
