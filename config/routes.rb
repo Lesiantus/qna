@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: %i[votable commentable] do
+    resources :subscriptions, shallow: true, only: %i[create destroy]
     resources :answers, shallow: true, only: %i[create destroy index update], concerns: %i[votable commentable] do
       patch :best, on: :member
     end
