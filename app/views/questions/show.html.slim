@@ -23,7 +23,7 @@ div class="question-#{@question.id}"
     - @question.files.each do |file|
       p= link_to file.filename.to_s, url_for(file)
   - if can?(:create, Subscription)
-    .subscribe-option
+    .subscribe-unsubscribe
       = render 'subscriptions/subscription', resource: @question
   .links
     = render 'shared/links_block', resource: @question

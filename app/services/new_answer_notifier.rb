@@ -5,8 +5,8 @@ module ExternalServices
     end
 
     def send_notifier
-      @answer.question.subscribers.find_each(batch_size: 500) do |subscriber|
-        NewAnswerNotifierMailer.notify_about_new_answer(subscriber, @answer).deliver_later
+      @answer.question.subscriptions.find_each(batch_size: 500) do |subscriber|
+        NewAnswerNotifierMailer.new_answer_notifier(subscriber.user, @answer).deliver_now
       end
     end
   end

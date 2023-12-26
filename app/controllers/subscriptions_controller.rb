@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_question, only: %i[create destroy]
+  before_action :question, only: %i[create]
+  before_action :find_subscription, only: %i[destroy]
 
   authorize_resource
 
@@ -10,13 +11,19 @@ class SubscriptionsController < ApplicationController
   end
 
   def destroy
-    @subscription = current_user.subscriptions.find_by(question_id: @question.id)
+    @subscription = current_user.subscriptions.find_by(question_id: @find_subscription.question_id)
     @subscription.destroy
+    flash.now[:notice] = 'Subscription deleted'
   end
 
   private
 
-  def find_question
-    @question ||= Question.find(params[:id])
+  def question
+    @question ||= Question.find(params[:question_id])
+  end
+
+  def find_subscription
+    @find_subscription ||= Subscription.find_by(question_id: params[:id])
+    @question = Question.find(params[:id])
   end
 end
