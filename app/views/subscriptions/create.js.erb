@@ -1,0 +1,2 @@
+$('.subscribe-unsubscribe').empty();
+$('.subscribe-unsubscribe').html('<%= j(render partial: "subscriptions/subscription", locals: { resource: @question }) %>');

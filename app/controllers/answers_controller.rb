@@ -24,6 +24,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
+        ExternalServices::NewAnswerNotifier.new(@answer).send_notifier
         files_info = @answer.files_info.map do |file_info|
           file = ActiveStorage::Attachment.find(file_info[:id]).blob
           file_info.merge({ url: rails_blob_path(file, only_path: true) })

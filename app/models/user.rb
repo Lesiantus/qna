@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :authorizations, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscribed_questions, through: :subscriptions, source: :question
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -31,5 +33,9 @@ class User < ApplicationRecord
 
   def email_confirmed?
     !email.match(TEMP_EMAIL)
+  end
+
+  def subscribed_to_question?(question)
+    subscribed_questions.exists?(question.id)
   end
 end
