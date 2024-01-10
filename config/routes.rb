@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   root to: 'questions#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  get '/search', to: 'search#search'
+
   concern :votable do
     member do
       patch :vote_up

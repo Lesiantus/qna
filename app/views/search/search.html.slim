@@ -1,0 +1,10 @@
+h1 Search results
+
+- if defined?(@data) && @data.present? && @data.respond_to?(:each)
+  .search_results
+    - @data.each do |resource|
+      p = resource.title if resource.respond_to?(:title)
+      p = resource.body if resource.respond_to?(:body)
+      p = resource.email if resource.respond_to?(:email)
+- else
+  p "No search query provided"
