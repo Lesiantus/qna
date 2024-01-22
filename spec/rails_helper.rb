@@ -39,7 +39,6 @@ RSpec.configure do |config|
   config.include FeatureHelpers, type: :feature
   config.include(OmniauthMacros)
   config.include ApiHelpers, type: :request
-  config.include WaitForAjax
 
   Capybara.javascript_driver = :selenium_chrome_headless
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
