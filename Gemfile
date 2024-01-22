@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'jquery-rails'
+gem 'mysql2'
+gem 'thinking-sphinx'
 
 # auth
 gem 'devise', '~> 4.0'
@@ -76,6 +78,7 @@ end
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'database_cleaner-active_record'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver', '>= 4.0.0.rc1'
