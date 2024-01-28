@@ -58,8 +58,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'localhost'
   gem 'letter_opener'
-  gem 'execjs'
-  gem 'mini_racer', '0.4.0'
   gem 'rspec-rails', '~> 6.0.0'
   gem 'capybara-email'
 end
