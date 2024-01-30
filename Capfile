@@ -7,6 +7,11 @@ require "capistrano/asdf"
 require "capistrano/bundler"
 require "capistrano/rails"
 require "capistrano/passenger"
+require "capistrano/sidekiq"
+require "whenever/capistrano"
+
+install_plugin Capistrano::Sidekiq
+install_plugin Capistrano::Sidekiq::Systemd
 
 # Load the SCM plugin appropriate to your project:
 #

@@ -1,4 +1,4 @@
-module ExternalServices
+module Services
   class FindForOauth
     attr_reader :auth
 

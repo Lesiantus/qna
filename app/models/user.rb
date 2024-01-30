@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def self.find_for_oauth(auth)
-    ExternalServices::FindForOauth.new(auth).call
+    Services::FindForOauth.new(auth).call
   end
 
   def create_authorization(auth)

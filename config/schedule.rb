@@ -13,9 +13,9 @@
 #   rake "some:great:rake:task"
 # end
 #
-#every 1.day do
-#  runner "DailyDigestJob.perform_now"
-#end
+every 1.day do
+  runner "DailyDigestJob.perform_now"
+end
 #
 # every 1.hour do
 #   runner "NewAnswerNotifierJob.perform_now"

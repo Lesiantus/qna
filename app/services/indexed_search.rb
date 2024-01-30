@@ -1,4 +1,4 @@
-module ExternalServices
+module Services
   class IndexedSearch
     SCOPES = %w[answer question comment user].freeze
 

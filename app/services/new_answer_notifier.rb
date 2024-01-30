@@ -1,4 +1,4 @@
-module ExternalServices
+module Services
   class NewAnswerNotifier
     def initialize(answer)
       @answer = answer
