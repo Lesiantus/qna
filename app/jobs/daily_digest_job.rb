@@ -1,4 +1,3 @@
-require 'services/daily_digest'
 class DailyDigestJob < ApplicationJob
   queue_as :mailer
 
