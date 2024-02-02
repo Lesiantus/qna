@@ -37,7 +37,8 @@ gem 'aws-sdk-s3', require: false
 gem 'active_model_serializers', '~> 0.10'
 gem 'dotenv-rails'
 gem 'gon'
-gem 'redis'
+gem 'redis', '~> 4.0'
+gem 'redis-rails'
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'skim'
