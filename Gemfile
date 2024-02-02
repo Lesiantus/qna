@@ -35,6 +35,7 @@ gem 'aws-sdk-s3', require: false
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem 'active_model_serializers', '~> 0.10'
+gem 'dotenv-rails'
 gem 'gon'
 gem 'sidekiq'
 gem 'sinatra', require: false
@@ -55,7 +56,6 @@ gem 'mini_racer', '0.4.0'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'localhost'
   gem 'letter_opener'
