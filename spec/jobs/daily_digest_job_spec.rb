@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe DailyDigestJob, type: :job do
-  let(:service) { double('Services::DailyDigestJob') }
+  let(:service) { double('DailyDigestJob') }
 
   before do
-    allow(Services::DailyDigest).to receive(:new).and_return(service)
+    allow(DailyDigest).to receive(:new).and_return(service)
   end
 
-  it 'calls Services::DailyDigest' do
+  it 'calls DailyDigest' do
     expect(service).to receive(:send_digest)
     DailyDigestJob.perform_now
   end

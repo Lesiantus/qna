@@ -12,7 +12,7 @@ module Qna
     config.load_defaults 6.1
     config.active_job.queue_adapter = :sidekiq
 
-    config.autoload_paths << Rails.root.join('app/config/services')
+    # config.autoload_paths << Rails.root.join('app/config/services')
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -20,7 +20,7 @@ module Qna
     # in config/environments, which are processed later.
     #
     # config.time_zone = "Central Time (US & Canada)"
-    config.eager_load_paths << Rails.root.join("app/config/services")
+    # config.eager_load_paths << Rails.root.join("app/config/services")
     # config.autoload_paths += [config.root.join('app')]
 
     config.generators do |g|

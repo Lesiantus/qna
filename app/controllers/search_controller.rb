@@ -8,7 +8,7 @@ class SearchController < ApplicationController
   private
 
   def service
-    @service ||= Services::IndexedSearch.new
+    @service ||= IndexedSearch.new
   end
 
   def search_params
