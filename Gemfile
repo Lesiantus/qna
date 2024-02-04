@@ -43,6 +43,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'skim'
 gem 'slim-rails'
+gem 'unicorn'
 gem 'whenever', require: false
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -73,6 +74,7 @@ group :development do
   gem 'capistrano-asdf', require: false
   gem 'capistrano-sidekiq', require: false
   gem 'capistrano-passenger', require: false
+  gem 'capistrano3-unicorn', require: false
 
   gem 'web-console', '>= 4.1.0'
   gem 'listen', '~> 3.3'
