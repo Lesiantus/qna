@@ -1,57 +1,58 @@
-div class = "answer-#{answer.id}"
+- cache answer do
+  div class = "answer-#{answer.id}"
 
-  - if answer.best?
-    .best_answer
-      h3= 'Best answer:'
+    - if answer.best?
+      .best_answer
+        h3= 'Best answer:'
+        p= answer.body
+    - else
       p= answer.body
-  - else
-    p= answer.body
 
-  .voting
-    -if current_user != answer.user && signed_in?
-      = render 'votes/vote', resource: answer
-    -if current_user&.author?(answer)
-      .score
-        = answer.rating
+    .voting
+      -if current_user != answer.user && signed_in?
+        = render 'votes/vote', resource: answer
+      -if current_user&.author?(answer)
+        .score
+          = answer.rating
 
-  .links
-    = render 'shared/links_block', resource: answer
-  .files
-    = render 'shared/files', resource: answer
+    .links
+      = render 'shared/links_block', resource: answer
+    .files
+      = render 'shared/files', resource: answer
 
-  .answer-comments
-    - if answer.comments.any?
-      =render 'comments/comments', resource: answer
-  .comment-form
-    -if signed_in?
-      =render 'comments/form', resource: answer
+    .answer-comments
+      - if answer.comments.any?
+        =render 'comments/comments', resource: answer
+    .comment-form
+      -if signed_in?
+        =render 'comments/form', resource: answer
 
-  - if current_user&.author?(answer)
-    = link_to 'Edit', '#', class: 'edit-answer-link', remote: true, data: { answer_id: answer.id }
-    = link_to ' | Delete answer', answer_path(answer), method: :delete, remote: true
+    - if current_user&.author?(answer)
+      = link_to 'Edit', '#', class: 'edit-answer-link', remote: true, data: { answer_id: answer.id }
+      = link_to ' | Delete answer', answer_path(answer), method: :delete, remote: true
 
-  - if current_user&.author?(answer.question) && !answer.best?
-    p= link_to 'Choose the best', best_answer_path(answer),
-      class: 'best-answer-link',
-      remote: true,
-      method: :patch,
-      data: { answer_id: answer.id }
+    - if current_user&.author?(answer.question) && !answer.best?
+      p= link_to 'Choose the best', best_answer_path(answer),
+        class: 'best-answer-link',
+        remote: true,
+        method: :patch,
+        data: { answer_id: answer.id }
 
-  = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" }, local: false do |f|
+    = form_with model: answer, class: 'hidden', html: { id: "edit-answer-#{answer.id}" }, local: false do |f|
 
-    .answer-edit-errors
-      = render 'shared/errors', resource: @answer
-    p
-      = f.label :body, 'Your answer'
-    p
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true, direct_upload: true
-    = render 'shared/files', resource: answer
-    p
-      = f.fields_for :links do |l|
-      .links
-        = link_to_add_association 'Add link', f, :links, partial: 'shared/links_field'
-    p
-      = f.submit 'Save'
+      .answer-edit-errors
+        = render 'shared/errors', resource: @answer
+      p
+        = f.label :body, 'Your answer'
+      p
+        = f.text_area :body
+      p
+        = f.label :files
+        = f.file_field :files, multiple: true, direct_upload: true
+      = render 'shared/files', resource: answer
+      p
+        = f.fields_for :links do |l|
+        .links
+          = link_to_add_association 'Add link', f, :links, partial: 'shared/links_field'
+      p
+        = f.submit 'Save'

@@ -1,36 +1,37 @@
-div class="question-#{@question.id}"
-  .voting
-    -if current_user != @question.user && signed_in?
-      = render 'votes/vote', resource: @question
-    -if current_user&.author?(@question)
-      .score
-        = @question.rating
-.question[data-id="#{@question.id}"]
-  p = @question.title
-  p = @question.body
-  .question-errors
-  .flash
-   h3
-    | Comment section
-  .question-comments
-  - if @question.comments.any?
-    =render 'comments/comments', resource: @question
-  -if signed_in?
-    .comment-form
-      =render 'comments/form', resource: @question
+- cache @question do
+  div class="question-#{@question.id}"
+    .voting
+      -if current_user != @question.user && signed_in?
+        = render 'votes/vote', resource: @question
+      -if current_user&.author?(@question)
+        .score
+          = @question.rating
+  .question[data-id="#{@question.id}"]
+    p = @question.title
+    p = @question.body
+    .question-errors
+    .flash
+     h3
+      | Comment section
+    .question-comments
+    - if @question.comments.any?
+      =render 'comments/comments', resource: @question
+    -if signed_in?
+      .comment-form
+        =render 'comments/form', resource: @question
 
-  - if @question.files.attached?
-    - @question.files.each do |file|
-      p= link_to file.filename.to_s, url_for(file)
-  - if can?(:create, Subscription)
-    .subscribe-unsubscribe
-      = render 'subscriptions/subscription', resource: @question
-  .links
-    = render 'shared/links_block', resource: @question
-  - if current_user&.author?(@question)
-    = link_to 'Edit question', '#', class: 'edit-question-link'
-    = link_to ' | Delete question', question_path(@question), method: :delete, local: false
-    = render 'form'
-  .answers
-    = render @question.answers
-  = render 'answers/form'
+    - if @question.files.attached?
+      - @question.files.each do |file|
+        p= link_to file.filename.to_s, url_for(file)
+    - if can?(:create, Subscription)
+      .subscribe-unsubscribe
+        = render 'subscriptions/subscription', resource: @question
+    .links
+      = render 'shared/links_block', resource: @question
+    - if current_user&.author?(@question)
+      = link_to 'Edit question', '#', class: 'edit-question-link'
+      = link_to ' | Delete question', question_path(@question), method: :delete, local: false
+      = render 'form'
+    .answers
+      = render @question.answers
+    = render 'answers/form'

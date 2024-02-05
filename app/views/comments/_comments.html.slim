@@ -1,3 +1,4 @@
 - resource.comments.each do |comment|
   p
-    = comment.body
+    - cache comment do
+      = comment.body
