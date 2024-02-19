@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Проект ресурса, на котором можно задать вопрос,
+на вопросы можно давать ответы, оставлять комментарии, прикреплять файлы и ссылки.
+Создавался по подобию StackOverflow
 
-Things you may want to cover:
+* Ruby 2,7
+* Rails 6.1.7.2
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Sidekiq
+* Redis
+* ActionCable
+* Devise
+* Sphinx
+* PostgresQl
+* Rspec/Capybara
+* Ajax
+* Json
+* yandex cloud в качестве облачного хранилища данных
